@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alert Management</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>SOC</h2>
+
+    <a href="/dashboard">🏠 Dashboard</a>
+    <a href="/users">👤 Users</a>
+    <a href="/alerts">🚨 Alerts</a>
+    <a href="#">⚠️ Incidents</a>
+    <a href="#">📄 Reports</a>
+    <a href="/">🚪 Logout</a>
+
+</div>
+
+
+<div class="main-content">
+
+<header>
+
+    <h1>Alert Management</h1>
+
+</header>
+
+
+<div class="table-box">
+
+<h2>Add New Alert</h2>
+
+<form action="/add_alert" method="POST" class="user-form">
+
+    <input
+        type="text"
+        name="alert_name"
+        placeholder="Alert Name"
+        required>
+
+
+    <select name="severity">
+
+        <option value="Critical">Critical</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+
+    </select>
+
+
+    <select name="status">
+
+        <option value="Open">Open</option>
+        <option value="Investigating">Investigating</option>
+        <option value="Closed">Closed</option>
+
+    </select>
+
+
+    <button type="submit">
+
+        Create Alert
+
+    </button>
+
+</form>
+
+<br>
+
+
+<h2>Alert List</h2>
+
+
+<table>
+
+<tr>
+
+<th>ID</th>
+<th>Alert Name</th>
+<th>Severity</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+
+{% for alert in alerts %}
+
+<tr>
+
+<td>{{ alert[0] }}</td>
+
+<td>{{ alert[1] }}</td>
+
+<td>{{ alert[2] }}</td>
+
+<td>{{ alert[3] }}</td>
+
+<td>
+
+<a href="/delete_alert/{{ alert[0] }}">
+
+<button class="delete-btn">
+
+Delete
+
+</button>
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOC Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>SOC</h2>
+
+        <a href="#">🏠 Dashboard</a>
+        <a href="#">🚨 Alerts</a>
+        <a href="#">⚠️ Incidents</a>
+        <a href="#">🛡 Threats</a>
+        <a href="#">📄 Reports</a>
+        <a href="#">⚙️ Settings</a>
+    </div>
+
+    <div class="main-content">
+
+        <header>
+            <h1>SOC Dashboard</h1>
+        </header>
+
+        <h2>Welcome to SOC Dashboard</h2>
+
+        <div class="cards">
+
+            <div class="card blue">
+                <h2>Total Alerts</h2>
+                <p>150</p>
+            </div>
+
+            <div class="card red">
+                <h2>Critical Threats</h2>
+                <p>25</p>
+            </div>
+
+            <div class="card orange">
+                <h2>Active Incidents</h2>
+                <p>12</p>
+            </div>
+
+            <div class="card green">
+                <h2>Resolved Incidents</h2>
+                <p>98</p>
+            </div>
+
+        </div>
+
+        <div class="table-box">
+
+            <h2>Recent Alerts</h2>
+
+            <table>
+
+                <tr>
+                    <th>Time</th>
+                    <th>IP Address</th>
+                    <th>Severity</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>09:10 AM</td>
+                    <td>192.168.1.15</td>
+                    <td>High</td>
+                    <td>Open</td>
+                </tr>
+
+                <tr>
+                    <td>09:35 AM</td>
+                    <td>10.0.0.25</td>
+                    <td>Medium</td>
+                    <td>Investigating</td>
+                </tr>
+
+                <tr>
+                    <td>10:05 AM</td>
+                    <td>172.16.0.12</td>
+                    <td>Low</td>
+                    <td>Closed</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="table-box">
+
+            <h2>Threat Statistics</h2>
+
+            <canvas id="myChart"></canvas>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Critical', 'High', 'Medium', 'Low'],
+                datasets: [{
+                    label: 'Threat Count',
+                    data: [25, 40, 60, 25],
+                    backgroundColor: [
+                        '#dc2626',
+                        '#f97316',
+                        '#eab308',
+                        '#16a34a'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>User Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>SOC</h2>
+
+    <a href="/dashboard">🏠 Dashboard</a>
+    <a href="/users">👤 Users</a>
+    <a href="#">🚨 Alerts</a>
+    <a href="#">⚠️ Incidents</a>
+    <a href="#">📄 Reports</a>
+    <a href="/">🚪 Logout</a>
+
+</div>
+
+
+<div class="main-content">
+
+<header>
+
+<h1>User Management</h1>
+
+</header>
+
+
+<div class="table-box">
+
+<h2>Add New User</h2>
+
+<form action="/add_user" method="POST" class="user-form">
+
+<input
+type="text"
+name="username"
+placeholder="Username"
+required>
+
+<input
+type="password"
+name="password"
+placeholder="Password"
+required>
+
+<select name="role">
+
+<option value="Administrator">
+Administrator
+</option>
+
+<option value="SOC Analyst">
+SOC Analyst
+</option>
+
+<option value="Incident Responder">
+Incident Responder
+</option>
+
+<option value="Threat Hunter">
+Threat Hunter
+</option>
+
+</select>
+
+<button type="submit">
+Add User
+</button>
+
+</form>
+
+<br>
+
+<h2>Registered Users</h2>
+
+<table>
+
+<tr>
+
+<th>ID</th>
+<th>Username</th>
+<th>Role</th>
+<th>Action</th>
+
+</tr>
+
+{% for user in users %}
+
+<tr>
+
+<td>{{ user[0] }}</td>
+
+<td>{{ user[1] }}</td>
+
+<td>{{ user[2] }}</td>
+
+<td>
+
+<a href="/edit_user/{{ user[0] }}">
+
+<button class="edit-btn">
+
+Edit
+
+</button>
+
+</a>
+
+
+<a href="/delete_user/{{ user[0] }}"
+onclick="return confirm('Delete this user?')">
+
+<button class="delete-btn">
+
+Delete
+
+</button>
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

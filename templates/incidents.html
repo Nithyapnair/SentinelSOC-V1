@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Incident Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>SOC</h2>
+
+    <a href="/dashboard">🏠 Dashboard</a>
+    <a href="/users">👤 Users</a>
+    <a href="/alerts">🚨 Alerts</a>
+    <a href="/incidents">⚠️ Incidents</a>
+    <a href="#">📄 Reports</a>
+    <a href="/">🚪 Logout</a>
+
+</div>
+
+<div class="main-content">
+
+<header>
+
+<h1>Incident Management</h1>
+
+</header>
+
+<div class="table-box">
+
+<h2>Create Incident</h2>
+
+<form action="/add_incident" method="POST" class="user-form">
+
+<input
+type="text"
+name="incident_name"
+placeholder="Incident Name"
+required>
+
+<select name="priority">
+
+<option value="Critical">Critical</option>
+<option value="High">High</option>
+<option value="Medium">Medium</option>
+<option value="Low">Low</option>
+
+</select>
+
+<select name="status">
+
+<option value="Open">Open</option>
+<option value="In Progress">In Progress</option>
+<option value="Resolved">Resolved</option>
+
+</select>
+
+<input
+type="text"
+name="assigned_to"
+placeholder="Assigned Analyst"
+required>
+
+<button type="submit">
+
+Create Incident
+
+</button>
+
+</form>
+
+<br>
+
+<h2>Incident List</h2>
+
+<table>
+
+<tr>
+
+<th>ID</th>
+<th>Incident</th>
+<th>Priority</th>
+<th>Status</th>
+<th>Assigned To</th>
+
+</tr>
+
+{% for incident in incidents %}
+
+<tr>
+
+<td>{{ incident[0] }}</td>
+<td>{{ incident[1] }}</td>
+<td>{{ incident[2] }}</td>
+<td>{{ incident[3] }}</td>
+<td>{{ incident[4] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
